@@ -67,8 +67,8 @@ async function run() {
   })
 
 
-  // create petch api (app.petch) update of edit any on single or all data and added in mongodb server and fronted show
-    
+  // create patch api (app.petch) update of edit any on single or all data and added in mongodb server and fronted show
+  // edit destination 
   app.patch('/destination/:id', async (req,res)=> {
          const {id} =  req.params ;
          const updatedData = req.body;
