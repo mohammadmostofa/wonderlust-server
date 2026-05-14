@@ -5,7 +5,7 @@ const dotenv =  require('dotenv')
 // cors origin to connect one to other server 
 const cors = require('cors')
 // mongodb
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 // call the dotenv config
 dotenv.config() 
 
@@ -54,6 +54,19 @@ async function run() {
           //send data in front
           res.json(result);
   })
+
+
+  //Create a GET API endpoint again to fetch the destination details,
+  //  match it with the frontend ID, and then display the data on the destination
+  //  details page.
+  
+  app.get('/destination/:id', async (req,res) =>{
+         const {id} = req.params 
+         const result = await destinationCollection.findOne({_id:new ObjectId(id)})
+         res.json(result)
+  })
+
+
 
 
    // end............
