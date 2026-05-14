@@ -45,9 +45,17 @@ async function run() {
       console.log(destinationData,"destinationData has been received")
       const result = await destinationCollection.insertOne(destinationData)
       // res receive and store mongodb
-      res.json(result)
-      
+      res.json(result)   
     })
+
+  //To create a GET API that reads data from MongoDB and sends it to the client (frontend),
+  app.get('/destination', async(req,res) => {
+          const result = await destinationCollection.find().toArray();
+          //send data in front
+          res.json(result);
+  })
+
+
    // end............
 
 
