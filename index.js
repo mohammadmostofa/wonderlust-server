@@ -99,6 +99,17 @@ async function run() {
   }) ;
 
 
+  // booking collection 
+
+  const BookingCollection = db.collection("booking")
+  // post mathod to receive data 
+  app.post('/booking' , async (req,res) =>{
+    const bookingData = req.body ;
+    const result = await BookingCollection.insertOne(bookingData)
+    res.json(result)
+  })
+
+
  
 
    // end............
