@@ -80,6 +80,25 @@ async function run() {
 
           res.json(result)
   });
+
+  
+  //to create delete api to delete destination by catch mongodb and fronted 
+  // delete app create 
+  
+  app.delete('/destination/:id' , async(req,res) => {
+         const {id}  =  req.params;
+         const  result = await destinationCollection.deleteOne({_id:new  ObjectId(id)});
+         
+         if(result.deletedCount > 0){
+                return res.status(200).json({ success: true }); 
+         }  else 
+            { return res.status(404).json({ success: false, message: "Not Found" }); 
+
+         }
+
+  }) ;
+
+
  
 
    // end............
