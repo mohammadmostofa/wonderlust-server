@@ -99,8 +99,7 @@ async function run() {
   }) ;
 
 
-  // booking collection 
-
+  // booking collection api
   const BookingCollection = db.collection("booking")
   // post mathod to receive data 
   app.post('/booking' , async (req,res) =>{
@@ -109,8 +108,7 @@ async function run() {
     res.json(result)
   })
 
-// to create get api   get the data of booking in front 
-
+// to create get api get the data of booking in front 
 app.get('/booking/:userId' , async(req,res) => {
   const {userId} =  req.params ;
   // mongodb te id userId hisebe ase abong ami user sokol data mi userId ase
@@ -118,6 +116,19 @@ app.get('/booking/:userId' , async(req,res) => {
   res.json(result)
        
 })
+// booking id delete 
+app.delete('/booking/:bookingId' , async(req,res) => {
+         const {bookingId}  =  req.params;
+         const  result = await BookingCollection.deleteOne({_id:new  ObjectId(bookingId)});
+         
+         if(result.deletedCount > 0){
+                return res.status(200).json({ success: true }); 
+         }  else 
+            { return res.status(404).json({ success: false, message: "Not Found" }); 
+
+         }
+
+  }) ;
  
 
    // end............
