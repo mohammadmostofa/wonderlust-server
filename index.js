@@ -109,7 +109,15 @@ async function run() {
     res.json(result)
   })
 
+// to create get api   get the data of booking in front 
 
+app.get('/booking/:userId' , async(req,res) => {
+  const {userId} =  req.params ;
+  // mongodb te id userId hisebe ase abong ami user sokol data mi userId ase
+  const result = await BookingCollection.find({userId:userId}).toArray() ;
+  res.json(result)
+       
+})
  
 
    // end............
