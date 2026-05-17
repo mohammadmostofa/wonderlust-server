@@ -59,8 +59,16 @@ async function run() {
   //Create a GET API endpoint again to fetch the destination details,
   //  match it with the frontend ID, and then display the data on the destination
   //  details page.
-  
-  app.get('/destination/:id', async (req,res) =>{
+
+  // middleware function add ()=>{},
+  app.get('/destination/:id', (req,res,next)=>{
+     const header = req.headers.authorization
+     console.log(header,"header")
+     
+    next()
+      
+     
+  }, async (req,res) =>{
          const {id} = req.params 
          const result = await destinationCollection.findOne({_id:new ObjectId(id)})
          res.json(result)
@@ -115,7 +123,9 @@ app.get('/booking/:userId' , async(req,res) => {
   const result = await BookingCollection.find({userId:userId}).toArray() ;
   res.json(result)
        
-})
+}) 
+
+
 // booking id delete 
 app.delete('/booking/:bookingId' , async(req,res) => {
          const {bookingId}  =  req.params;
